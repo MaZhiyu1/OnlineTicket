@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/viewDetail" method="post"  >
+<table border="1">
+    <thead>
+    <tr>
+        <th>Poster</th>
+        <th>Title</th>
+        <th>About</th>
+        <th>Book</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="movie : ${movies}">
+        <td>
+            <img th:if="${movie.myPicture}==1" th:src="@{/assets/images/1.png}" width="100" height="100" alt="Movie Picture">
+            <img th:if="${movie.myPicture}==2" th:src="@{/assets/images/2.png}" width="100" height="100" alt="Movie Picture">
+            <img th:if="${movie.myPicture}==3" th:src="@{/assets/images/3.png}" width="100" height="100" alt="Movie Picture">
+        </td>
+        <td th:text="${movie.name}"></td>
+        <td th:text="${movie.about}"></td>
+        <td>
+            <div th:each="entry : ${tickets}">
+                <div th:if="${entry.key==movie}" th:text="${entry.value.size()}"></div>
+                <button th:if="${entry.key==movie}" name="movieId" th:value="${movie.getId()}" type="submit" >View Detail</button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</form>
+</body>
+</html>
